@@ -2,19 +2,17 @@ import 'core-js/fn/object/assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/Main';
-import { reducer } from './reducers/reduce';
-import { addIdea } from './actions/addIdea';
-import { createStore } from 'redux';
-
-let store = createStore(reducer);
-console.log(store.getState());
-let unsubscribe = store.subscribe(() =>
-  console.log(store.getState())
-)
-
-store.dispatch(addIdea('Learn about actions'))
-store.dispatch(addIdea('Learn about actions 2'))
-store.dispatch(addIdea('Learn about actions 3'))
+import { Provider } from 'react-redux'
+import { store } from './stores/store'
+// import { aa } from './components/aa';
+// const unsubscribe = store.subscribe(() =>
+//   console.log(store.getState())
+// )
 
 // Render the main component into the dom
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+)

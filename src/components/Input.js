@@ -16,6 +16,7 @@ class InputComponent extends React.Component {
     const content = this.refs.ideacontent.value;
     this.props.addIdea(content);
     this.refs.ideacontent.value = '';
+    // this.props.dispatch(addIdea(content))
   }
 }
 
