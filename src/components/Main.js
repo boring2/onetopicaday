@@ -7,9 +7,6 @@ import TopicComponent from './Topic';
 import IdeaComponent from './Idea';
 import InputComponent from './Input';
 import { connect } from 'react-redux'
-import { store } from '../stores/store'
-
-// let yeomanImage = require('../images/yeoman.png');
 
 class AppComponent extends React.Component {
 
