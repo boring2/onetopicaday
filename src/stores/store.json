@@ -1,0 +1,30 @@
+//about the store format
+
+{
+  "topics": {
+    "topic_$topicId": {
+
+      "id": "$topicId",
+      "title": "$title",
+
+      "contents": {
+
+        "$userId_$contentId": {
+          "id": "$contentId",
+          "text": "$text"
+        },
+
+        "$userId_$contentId": {
+          "id": "$contentId",
+          "text": "$text"
+        }
+
+      },
+
+      "contentRef": {
+        "$rev" : ["$userId_$contentId", "$userId_$contentId", "$userId_$contentId"],
+        "$rev" : ["$userId_$contentId", "$userId_$contentId", "$userId_$contentId"]
+      }
+    }
+  }
+}

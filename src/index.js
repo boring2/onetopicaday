@@ -1,14 +1,18 @@
-import 'core-js/fn/object/assign';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/Main';
-import { Provider } from 'react-redux'
+import 'core-js/fn/object/assign'
+import React from 'react'
+import ReactDOM from 'react-dom'
+// import { Root } from './components/Root'
 import { store } from './stores/store'
+import { Router, Route, browserHistory } from 'react-router'
+import { Provider } from 'react-redux'
+import App from './components/Main';
 
 // Render the main component into the dom
-ReactDOM.render(
+ReactDOM.render((
   <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('app')
+    <Router history={browserHistory}>
+      <Route path="/(:topic)" component={App} />
+    </Router>
+  </Provider>
+  ),document.getElementById('app')
 )

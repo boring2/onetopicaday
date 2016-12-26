@@ -1,39 +1,88 @@
-require('normalize.css/normalize.css');
-require('styles/App.scss');
+require('normalize.css/normalize.css')
+require('styles/App.scss')
 
-import { addIdea } from '../actions/addIdea';
-import React from 'react';
-import TopicComponent from './Topic';
-import IdeaComponent from './Idea';
-import InputComponent from './Input';
+import { newRev, addContent } from '../actions'
+import React from 'react'
+import TopicComponent from './Topic'
+import IdeaComponent from './Idea'
+import InputComponent from './Input'
+import TopicTabComponent from './TopicTab'
+import RevTabComponent from './RevTab'
+import appConfig from '../config/config'
 import { connect } from 'react-redux'
 
 class AppComponent extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
-  addIdea(idea) {
-    this.props.dispatch(addIdea(idea));
+  addContent(text) {
+    const contentId = Date.now()
+    const { topics, params, location } = this.props
+    const pathname = params.topic || appConfig.pathname
+    const rev = location.query.rev || appConfig.rev
+    const topicId = topics[pathname].id
+    this.props.dispatch(addContent(topicId, 'boring', contentId, text, rev));
+  }
+
+  addRev(text) {
+    const { topics, params, location } = this.props
+    const pathname = params.topic || appConfig.pathname
+    const rev = location.query.rev || appConfig.rev
+    const topic = topics[pathname]
+    const topicId = topic.id
+
+    const selectContentId = AppComponent.defaultProps.selectIdea
+    const revLength = Object.keys(topic.contentRef).length
+    if (revLength >= 5) {
+      alert('Your can\'t create a new rev, because it has 5 revs');
+      return
+    }
+    this.props.dispatch(newRev(topicId, rev, selectContentId, `rev_${revLength+1}` ))
+    const contentId = Date.now();
+    this.props.dispatch(addContent(topicId, 'boring', contentId, text, `rev_${revLength+1}`));
+  }
+
+  selectIdea (contentId) {
+    AppComponent.defaultProps.selectIdea = contentId
   }
 
   render() {
+    let contentArr = []
+    const { params, topics, location } = this.props
+    console.log(this.props.params)
+    console.log(appConfig)
+    const pathname = params.topic || appConfig.pathname
+    const rev = location.query.rev || appConfig.rev
+    const topic = topics[pathname]
+    const revs = Object.keys(topic.contentRef)
+    if(topic.contentRef[rev]) {
+      contentArr = topic.contentRef[rev]
+    }
     return (
       <div>
-        <TopicComponent />
+        <TopicTabComponent />
+        <RevTabComponent revs={revs} pathname={pathname}/>
+        <TopicComponent title={topic.title} />
         {
-          this.props.ideas.map((value, index) => {return <IdeaComponent value={value} key={index} />})
+          contentArr.map((value, index) => {
+            return <IdeaComponent selectIdea={this.selectIdea.bind(this)} contentId={value} value={topic.contents[value]['text']} key={index} />
+          })
         }
-        <InputComponent addIdea={this.addIdea.bind(this)} />
+        <InputComponent addRev={this.addRev.bind(this)} addContent={this.addContent.bind(this)} />
       </div>
     );
   }
 }
 
-function getProp (state) {
-  return state;
+function mapStateToProps (state) {
+  return { topics: state }
 }
 
-AppComponent = connect(getProp)(AppComponent);
-
 AppComponent.defaultProps = {
-};
+  selectIdea: ''
+}
 
-export default AppComponent;
+AppComponent = connect(mapStateToProps)(AppComponent)
+
+export default AppComponent

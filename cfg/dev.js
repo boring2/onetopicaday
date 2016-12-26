@@ -23,7 +23,10 @@ let config = Object.assign({}, baseConfig, {
       searchResolveModulesDirectories: false
     })
   ],
-  module: defaultSettings.getDefaultModules()
+  module: defaultSettings.getDefaultModules(),
+  // devServer: {
+  //   historyApiFallback: true
+  // }
 });
 
 // Add needed loaders to the defaults here

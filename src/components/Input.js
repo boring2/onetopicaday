@@ -7,16 +7,23 @@ class InputComponent extends React.Component {
       <div className="input-idea">
         <textarea ref="ideacontent" rows="3" cols="20" placeholder="Input your idea">
         </textarea>
-        <button onClick={this.addIdea.bind(this)}>Send</button>
+        <button onClick={this.addContent.bind(this)}>Continue</button>
+        <button onClick={this.addRev.bind(this)}>Add New Rev</button>
       </div>
     );
   }
 
-  addIdea() {
-    const content = this.refs.ideacontent.value;
-    this.props.addIdea(content);
-    this.refs.ideacontent.value = '';
+  addContent() {
+    const content = this.refs.ideacontent.value
+    this.props.addContent(content)
+    this.refs.ideacontent.value = ''
     // this.props.dispatch(addIdea(content))
+  }
+
+  addRev() {
+    const content = this.refs.ideacontent.value;
+    this.props.addRev(content)
+    this.refs.ideacontent.value = ''
   }
 }
 

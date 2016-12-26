@@ -1,14 +1,16 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
 
 class TopicComponent extends React.Component {
   render() {
     return (
       <div className="topic">
-        <h1>我是今日话题.</h1>
+        <h1>{this.props.title}</h1>
       </div>
     );
   }
 }
+
 
 TopicComponent.defaultProps = {
 };
