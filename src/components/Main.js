@@ -86,7 +86,7 @@ class AppComponent extends React.Component {
           })
         }
         {
-          this.state.isSelect ? <div style={{display:'block'}}><InputComponent style={{display:'block'}} addRev={this.addRev.bind(this)} addContent={this.addContent.bind(this)} /> </div>:<div style={{display:'none'}}> <InputComponent style={{display:'none'}} addRev={this.addRev.bind(this)} addContent={this.addContent.bind(this)} /></div>
+          <InputComponent isSelect={this.state.isSelect} addRev={this.addRev.bind(this)} addContent={this.addContent.bind(this)} />
         }
 
       </div>

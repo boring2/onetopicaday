@@ -6,4 +6,12 @@
   textarea {
     vertical-align: middle;
   }
+
+  .select {
+    display: inline-block;
+  }
+
+  .unselect {
+    display: none;
+  }
 }
