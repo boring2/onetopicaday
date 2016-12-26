@@ -9,7 +9,8 @@ class IdeaComponent extends React.Component {
     );
   }
 
-  clickHandle () {
+  clickHandle (e) {
+    e.stopPropagation();
     this.props.selectIdea(this.props.contentId)
   }
 }

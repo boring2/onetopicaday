@@ -31,7 +31,6 @@ export function addContent (topicId, userId, contentId, text, rev) {
   }
 }
 
-
 export function addIdea (text) {
   return {
     type: 'ADD',

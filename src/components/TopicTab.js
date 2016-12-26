@@ -4,12 +4,15 @@ import { Link } from 'react-router';
 
 class TopicTab extends React.Component {
   render () {
-    const { topics } = this.props
-    console.log(this.props)
+    const { topics, activeTopicId } = this.props
     return (
       <div>
         {
-          Object.keys(topics).map((v)=>{return <Link key={v} to={{ pathname: v, query: {rev: "rev_1"} }}>{v}</Link>})
+          Object.keys(topics).map((topicId)=>{
+            return <span key={topicId} className={topicId === `topic_${activeTopicId}` ? 'topic-link active' : 'topic-link'}>
+                    <Link to={{ pathname: topicId, query: {rev: 'rev_1'} }}>{topicId}</Link>
+                   </span>
+                  })
         }
       </div>
     )

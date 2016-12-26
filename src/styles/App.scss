@@ -1,7 +1,11 @@
 /* Base Application Styles */
+@import 'base';
 @import 'component/input';
+@import 'component/revtab';
+@import 'component/topictab';
+@import 'component/idea';
 
-body {
-  color: #fff;
-  background-color: #aaa;
+
+#app, .content {
+  height: 100%;
 }

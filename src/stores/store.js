@@ -128,7 +128,7 @@ const initState = {
     },
     'id': 2,
     'title': 'topic 2'
-  },
+  }
 
 }
 export const store = createStore(reducer, initState);
